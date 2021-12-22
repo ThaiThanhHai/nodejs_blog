@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
@@ -19,6 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const hbs = handlebars.create({
     extname: '.hbs',
+    helpers: {
+        sum: (a, b) => a + b,
+    }
 });
 
 // Template engine
@@ -31,6 +35,9 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 // Get data req.body
 app.use(express.json());
 app.use(express.urlencoded());
+
+
+app.use(methodOverride('_method'))
 
 // Route init
 route(app);
