@@ -34,7 +34,7 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // Get data req.body
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use(methodOverride('_method'))
